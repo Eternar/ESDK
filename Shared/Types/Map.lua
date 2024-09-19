@@ -30,7 +30,7 @@ end
 
 function Map:Keys()
     local keys = {};
-    
+
     for k, _ in pairs(self.Data) do
         table.insert(keys, k);
     end
@@ -85,7 +85,6 @@ function Map:Reduce(func, initial)
 
     return acc;
 end
-
 
 function Map:Count()
     return #self.Data;
