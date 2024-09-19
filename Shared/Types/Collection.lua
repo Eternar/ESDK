@@ -102,6 +102,65 @@ function Collection:Clear()
     self.Items = {};
 end
 
+function Collection:IndexOf(item)
+    for i, v in ipairs(self.Items) do
+        if v == item then
+            return i;
+        end
+    end
+
+    return -1;
+end
+
+function Collection:Reverse()
+    local reversed = Collection:New();
+
+    for i = #self.Items, 1, -1 do
+        reversed:Add(self.Items[i]);
+    end
+
+    return reversed;
+end
+
+function Collection:Map(func)
+    local mapped = Collection:New();
+
+    for _, v in ipairs(self.Items) do
+        mapped:Add(func(v));
+    end
+
+    return mapped;
+end
+
+function Collection:Filter(predicate)
+    local filtered = Collection:New();
+
+    for _, v in ipairs(self.Items) do
+        if predicate(v) then
+            filtered:Add(v);
+        end
+    end
+
+    return filtered;
+end
+
+function Collection:Reduce(func, initial)
+    local acc = initial;
+
+    for _, v in ipairs(self.Items) do
+        acc = func(acc, v);
+    end
+
+    return acc;
+end
+
+function Collection:Merge(otherCollection)
+    for _, v in ipairs(otherCollection:GetRaw()) do
+        self:Add(v);
+    end
+end
+
+
 function Collection:GetRaw()
     return self.Items;
 end
