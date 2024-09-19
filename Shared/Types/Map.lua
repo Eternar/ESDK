@@ -28,6 +28,65 @@ function Map:Contains(key)
     return self.Data[key] ~= nil;
 end
 
+function Map:Keys()
+    local keys = {};
+    
+    for k, _ in pairs(self.Data) do
+        table.insert(keys, k);
+    end
+
+    return keys;
+end
+
+function Map:Values()
+    local values = {};
+
+    for _, v in pairs(self.Data) do
+        table.insert(values, v);
+    end
+
+    return values;
+end
+
+function Map:Merge(otherMap)
+    for k, v in pairs(otherMap:GetRaw()) do
+        self.Data[k] = v;
+    end
+end
+
+function Map:Filter(func)
+    local filtered = {};
+
+    for k, v in pairs(self.Data) do
+        if func(k, v) then
+            filtered[k] = v;
+        end
+    end
+
+    return filtered;
+end
+
+function Map:MapValues(func)
+    local mapped = {};
+
+    for k, v in pairs(self.Data) do
+        mapped[k] = func(v);
+    end
+
+    return mapped;
+end
+
+function Map:Reduce(func, initial)
+    local acc = initial;
+
+    for k, v in pairs(self.Data) do
+        acc = func(acc, v, k);
+    end
+
+    return acc;
+end
+
+
 function Map:Count()
     return #self.Data;
 end
