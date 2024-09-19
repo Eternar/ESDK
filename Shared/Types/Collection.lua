@@ -160,7 +160,6 @@ function Collection:Merge(otherCollection)
     end
 end
 
-
 function Collection:GetRaw()
     return self.Items;
 end
