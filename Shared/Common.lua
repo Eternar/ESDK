@@ -104,11 +104,17 @@ if IS_SERVER then
 else
     -- RedM related client-common variables..
     if IS_REDM then
-        -- FiveM related client-common variables..
-    elseif IS_FIVEM then
-        -- LibertyM related client-common variables..
-    elseif IS_LIBERTYM then
+        MP_CHARACTER_MALE = `mp_male`;
+        MP_CHARACTER_FEMALE = `mp_female`;
 
+    -- FiveM related client-common variables..
+    elseif IS_FIVEM then
+        MP_CHARACTER_MALE = `mp_m_freemode_01`;
+        MP_CHARACTER_FEMALE = `mp_f_freemode_01`;
+
+    -- LibertyM related client-common variables..
+    elseif IS_LIBERTYM then
+        -- TODO: unknown atm
     end
 
     -- Shared client related common variables..
