@@ -40,7 +40,7 @@ function ResourceManager:Constructor()
         end
     end
 
-    self.OnResourceStart = self:OnEvent("OnResourceStart", ResourceManager.OnResourceStartInternal);
+    self.OnResourceStart = self:OnEvent("onResourceStart", ResourceManager.OnResourceStartInternal);
     self.OnResourceStop = self:OnEvent("onResourceStop", ResourceManager.OnResourceStopInternal);
 
     CurrentResourceManager = self;
