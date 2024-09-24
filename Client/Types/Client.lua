@@ -9,7 +9,7 @@ Client.TogglePvP = (function(state, ped)
     NetworkSetFriendlyFireOption(state);
     SetRelationshipBetweenGroups(state and GroupRelationship.Hate or GroupRelationship.Companion, "PLAYER", "PLAYER");
 
-    if (ped) then
+    if (IS_FIVEM) and (ped) then
         SetCanAttackFriendly(ped, state, false);
     end
 
