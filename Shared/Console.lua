@@ -6,7 +6,37 @@ local ERROR <const> = DEFAULT .. "[^1" .. "ERROR" .. DEFAULT .. "]";
 local WARNING <const> = DEFAULT .. "[^3" .. "WARNING" .. DEFAULT .. "]";
 local DEBUG <const> = DEFAULT .. "[^5" .. "DEBUG" .. DEFAULT .. "]";
 
+local Formats =
+{
+    ["{redorange}"] = "^1",
+    ["{lightgreen}"] = "^2",
+    ["{lightyellow}"] = "^3",
+    ["{darkblue}"] = "^4",
+    ["{lightblue}"] = "^5",
+    ["{violet}"] = "^6",
+    ["{white}"] = "^7",
+    ["{bloodred}"] = "^8",
+    ["{fuchsia}"] = "^9",
+    ["{bold}"] = "^*",
+    ["{underline}"] = "^_",
+    ["{strikethrough}"] = "^~",
+    ["{underline_strikethrough}"] = "^=",
+    ["{bold_underline_strikethrough}"] = "^*^=",
+    ["{default}"] = "^0",
+    ["{reset}"] = "^r"
+};
+
+local function ParseFormat(text)
+    for placeholder, format in pairs(Formats) do
+        text = text:gsub(placeholder, format);
+    end
+    
+    return text;
+end
+
 local function InternalWrite(prefix, str)
+    str = ParseFormat(str);
+    
     if (IS_SERVER) then
         Citizen.CreateThreadNow(function()
             -- Wait to prevent from printing the debug strings to ingame chat (same frame bug)
