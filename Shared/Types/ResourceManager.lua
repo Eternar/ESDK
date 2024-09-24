@@ -113,4 +113,10 @@ function ResourceManager:GetMapResources()
     end);
 end
 
+function ResourceManager:ForAllResources(func)
+    self.Resources:ForEach(function(_, resource)
+        func(resource);
+    end);
+end
+
 ResourcesManager = ResourceManager:New();
