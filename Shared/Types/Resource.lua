@@ -79,6 +79,16 @@ function Resource:SaveFile(fileName, data, dataLength)
     return SaveResourceFile(self.Name, fileName, data, dataLength or -1);
 end
 
+if (IS_SERVER) then
+    function Resource:Start()
+        StartResource(self.Name)
+    end
+
+    function Resource:Stop()
+        StopResource(self.Name)
+    end
+end
+
 function Resource.__eq(lhs, rhs)
     return lhs:GetName() == rhs:GetName();
 end
